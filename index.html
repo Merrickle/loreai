@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote Generator</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #333;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .quote {
+      max-width: 75%;
+      color: white;
+      text-align: justify;
+      word-wrap: break-word;
+      font-family: "Garamond", "Times New Roman", serif;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <center>
+  <div class="quote" id="quote-container">Gathering Inspiration...</div>
+  <script>
+    (async () => {
+      //Grabs the data json object from the localhost:3000/api/prompt endpoint and stores it in the data variable
+        const response = await fetch("http://localhost:3000/api/Q3JlYXRlIGFuIGVuY2hhbnRpbmcgYW5kIHdoaW1zaWNhbCBmYW50YXN5IHF1b3RlLCBhdHRyaWJ1dGVkIHRvIGEgZmljdGlvbmFsIGF1dGhvciBhbG9uZyB3aXRoIGFueSB0aXRsZXMgb3IgcG9zaXRpb25zIHRoZXkgbWF5IGhvbGQgd2l0aGluIHRoZWlyIG15dGhpY2FsIHJlYWxtLiBUaGlzIHF1b3RlIHNob3VsZCBzaG93Y2FzZSB0aGUgaW1hZ2luYXRpdmUgYW5kIG15c3RpY2FsIG5hdHVyZSBvZiBmYW50YXN5IGxpdGVyYXR1cmUsIHJlZmxlY3RpbmcgdGhlIHdpc2RvbSBhbmQgY3JlYXRpdml0eSBvZiB0aGUgaW52ZW50ZWQgYXV0aG9yLg==");
+        const data = await response.json();
+      const quoteContainer = document.getElementById("quote-container");
+      quoteContainer.textContent = data.choices[0].text.trim();
+    })();
+  </script>
+  </center>
+ 
+</body>
+</html>
